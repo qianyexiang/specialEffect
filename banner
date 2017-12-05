@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<!-- Always force latest IE rendering engine (even in intranet) & Chrome Frame
+		Remove this if you use the .htaccess -->
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+		<title>轮播旋转</title>
+		<meta name="description" content="" />
+		<meta name="author" content="Administrator" />
+ 
+		<!-- Replace favicon.ico & apple-touch-icon.png in the root of your domain and delete these references -->
+		<link rel="shortcut icon" href="/favicon.ico" />
+		<link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+		<style type="text/css">
+			 *{
+			 	margin: 0;
+			 	padding: 0;
+			 }
+			 .crousle{		
+			 	overflow:hidden;
+			 	width: 1000px;
+			 	height: 320px;
+			 	margin: 20px auto;		 
+			 }
+			  .imgbox{	
+			  	position: relative;	 
+			  	width: 500px;
+			 	height: 300px;	 
+			 	margin:0 auto;			 	
+			 	list-style: none;		 	
+			 }
+			 .imgbox li{
+			 	position: absolute;
+			 	width: 500px;
+			 	height: 300px;		 	
+			 }
+			 .imgbox li img{
+			 	width: 500px;
+			 	height: 300px;
+			 }
+			 .line1{		 	
+			 	z-index: 2;
+			 	left:-250px;
+				-ms-transform: scale(0.8); /* IE 9 */
+				-ms-transform-origin:left bottom; /* IE 9 */
+				-webkit-transform: scale(0.8); /* Safari and Chrome */
+				-webkit-transform-origin:left bottom; /* Safari and Chrome */
+				
+			 }
+			 .line2{		 	
+			 	z-index: 3;
+			 	left:0px;
+			   -moz-transition: 2s; /* Firefox 4 */
+				-webkit-transition: 2s; /* Safari 和 Chrome */
+				-o-transition: 2s; /* Opera */
+			 }
+			 .line3{		 	
+			 	z-index: 2;
+			 	left:350px;		 	
+			 }
+			  .line4{		 	
+			 	z-index: 1;
+			 	left:500px;
+			 }
+			  .line5{		 	
+			 	z-index: 1;
+			 	left:750px;
+			 }
+			  .line6{		 	
+			 	z-index: 1;
+			 	left:1000px;
+			 }
+			.line1, .line3,.line4,.line5,.line6{		 
+				-ms-transform: scale(0.8); /* IE 9 */
+				-ms-transform-origin:left bottom; /* IE 9 */
+				-webkit-transform: scale(0.8); /* Safari and Chrome */
+				-webkit-transform-origin:left bottom; /* Safari and Chrome */
+						
+				-moz-transition: 2s; /* Firefox 4 */
+				-webkit-transition: 2s; /* Safari 和 Chrome */
+				-o-transition: 2s; /* Opera */
+			 }
+			 
+			 .line{
+			 	list-style: none;	
+			 	margin: 5px auto;
+			 	width: 260px;
+			 	height: 10px;	 	
+			 }
+			 .line a{
+			 	background: #ccc;
+			 	display:block;
+			 	width: 30px;
+			 	height: 10px;		 	
+			 	float:left;
+			 	margin: 0 5px;
+			 }
+		</style>
+		
+
+	</head>
+	<body>
+		<div class="crousle">
+					<ul class="imgbox">
+						<li class="line1"><a href="javascript:;"><img src="img/1.jpg" alt="one"/></a></li>
+						<li class="line2"><a href="javascript:;"><img src="img/2.jpg" alt="one"/></a></li>
+						<li class="line3"><a href="javascript:;"><img src="img/3.jpg" alt="one"/></a></li>
+						<li class="line4"><a href="javascript:;"><img src="img/4.jpg" alt="one"/></a></li>
+						<li class="line5"><a href="javascript:;"><img src="img/5.jpg" alt="one"/></a></li>
+						<li class="line6"><a href="javascript:;"><img src="img/6.jpg" alt="one"/></a></li>
+					</ul>
+			<div class="line" >
+					<a href="javascript:;"></a>
+					<a href="javascript:;"></a>
+					<a href="javascript:;"></a> 
+					<a href="javascript:;"></a>
+					<a href="javascript:;"></a>
+					<a href="javascript:;"></a> 
+			</div>
+		</div>
+		<script>
+			var lineA = document.getElementsByClassName("line");		
+			var lineB = lineA[0].getElementsByTagName("a");	
+		    var len = lineB.length;
+			var index = 0;
+			lineB[index].style.background ="#13ce3c"; 	 
+			
+			var listName = ["line1","line2","line3","line4","line5","line6"];
+			var lilist = document.getElementsByTagName("li");
+			var le = lilist.length;		
+			 	 
+			function nextPic () {
+			  listName.unshift(listName[5]);
+			  listName.pop();
+			  for(var i=0; i<le;i++){
+			  	lilist[i].setAttribute("class",listName[i]);
+			  }
+			  index++;
+			  if(index > 5){
+			  	index = 0;
+			  }
+			  linecor();
+			}
+			
+			function prePic () {
+			  listName.push(listName[0]);
+			  listName.shift();
+			  for(var i=0; i<le;i++){
+			  	lilist[i].setAttribute("class",listName[i]);
+			  }
+			  index--;
+			  if(index <0 || index == 0 ){
+			  	index = 5;
+			  }
+			 linecor();
+			}
+			
+		  function linecor () {	 
+		  	
+			  for(var i=0;i<len;i++){			 	
+			  	if(i == index){
+			  		  lineB[i].style.background ="#13ce3c";	  	
+			  	}	  
+			  	else{
+			  		lineB[i].style.background = "#ccc";
+			  	}		  	
+			  }			  
+			
+			}		
+
+			var eleList = ["line3","line1"];
+			var eleAct = ["nextPic","prePic"];
+			document.querySelector(".crousle").addEventListener("click",function(){		
+				var el = event.target.parentNode.parentNode;			
+				/*if(el.getAttribute("class") = "line3"){
+					nextPic();			
+				}
+				if(el.getAttribute("class") = "line1"){
+					prePic();
+				}*/
+			 
+				var classname = el.classList[0];
+				window[eleAct[eleList.indexOf(classname)]]();				 
+			})
+		</script>
+	</body>
+</html>
